@@ -1,0 +1,169 @@
+1)
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class FacebookSignUpAutomation {
+
+    public static void main(String[] args) throws InterruptedException {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "D://driver//chromedriver.exe");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to Facebook website
+        driver.get("https://www.facebook.com/");
+
+        // Verify redirection to Facebook homepage
+        assert "Facebook".equals(driver.getTitle());
+
+        // Click on the "Create new account" button
+        WebElement createAccountButton = driver.findElement(By.xpath("//input[@id='u_0_0_18']='Create New Account']"));
+        createAccountButton.click();
+
+        // Fill in the sign-up form
+        WebElement firstNameInput = driver.findElement(By.name("firstname"));
+        WebElement lastNameInput = driver.findElement(By.name("lastname"));
+        WebElement emailInput = driver.findElement(By.name("reg_email__"));
+        WebElement passwordInput = driver.findElement(By.name("reg_password__"));
+        Select birthdayDayDropdown = new Select(driver.findElement(By.name("birthday_day")));
+        Select birthdayMonthDropdown = new Select(driver.findElement(By.name("birthday_month")));
+        Select birthdayYearDropdown = new Select(driver.findElement(By.name("birthday_year")));
+        WebElement genderRadio = driver.findElement(By.xpath("//input[@id="u_d_n_f6"]/div[1]"));  
+
+	// Locate the radio button for Male and click on it
+	WebElement maleRadioButton = driver.findElement(By.xpath("//input[@id="u_d_o_aG"]/span[2]/label"));
+	maleRadioButton.click();
+
+	// or
+
+	// Locate the radio button for Female and click on it
+	WebElement femaleRadioButton = driver.findElement(By.xpath("//input[@id="u_d_o_aG"]/span[1]/label"));
+	femaleRadioButton.click();
+
+
+        firstNameInput.sendKeys("Arpita");
+        lastNameInput.sendKeys("Kembhavi");
+        emailInput.sendKeys("kembhaviak.com");
+        passwordInput.sendKeys("Arpita@2000");
+        birthdayDayDropdown.selectByVisibleText("11");
+        birthdayMonthDropdown.selectByVisibleText("May");
+        birthdayYearDropdown.selectByVisibleText("1985");
+        genderRadio.click();
+
+        // Click on the "Sign Up" button
+        WebElement signUpButton = driver.findElement(By.name("//input[@id="u_d_s_2N"]"));
+        signUpButton.click();
+
+      
+        Thread.sleep(5000);
+
+        // Verify successful registration and redirection to Facebook homepage
+        assert "Facebook".equals(driver.getTitle());
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
+
+2)
+package actionsClass; 
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class DragDropDemo {
+
+	public static void main(String[] args) {
+	// Set the path to your ChromeDriver executable
+	System.setProperty("webdriver.chrome.driver", "D://driver//chromedriver.exe");
+
+	// Create a new instance of the Chrome driver
+	WebDriver driver=new ChromeDriver();
+
+	// Maximize the browser window
+	driver.manage().window().maximize();
+
+	
+        // Navigate to jqueryui website
+	driver.get("https://jqueryui.com/droppable/");
+
+	Thread.sleep(5000);
+
+	// Create an Actions object
+	Actions act=new Actions (driver);
+
+	// Perform drag and drop operation from source to target
+	
+	WebElement src=driver.findElement(By.xpath("//[@id="draggable"]"));
+
+	WebElement dest=driver.findElement(By.xpath("//[@id="droppable"]"));
+
+	// Verify that the text of the target element has changed to "Dropped!"	
+
+	act.clickAndHold(src)
+
+	.pause(Duration.ofSeconds(2))
+
+	.moveToElement(dest)
+
+	.pause(Duration.ofSeconds(2))
+
+	.release()
+
+	.build()
+
+	.perform();
+	
+	}
+
+}
+
+DRAG METHOD
+
+package actionsClass; 
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class DragDemo {
+
+	public static void main(String[] args) {
+	// Set the path to your ChromeDriver executable
+	System.setProperty("webdriver.chrome.driver", "D://driver//chromedriver.exe");
+
+	// Create a new instance of the Chrome driver
+	WebDriver driver=new ChromeDriver();
+
+	// Maximize the browser window
+	driver.manage().window().maximize();
+
+	
+        // Navigate to jqueryui website
+	driver.get("https://jqueryui.com/droppable/");
+
+	Thread.sleep(5000);
+
+	// Create an Actions object
+	Actions act=new Actions (driver);
+
+	// Switch to the iframe containing the draggable elements
+	driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='demo-frame']")));
+	
+	// Source to find xoffset and yoffset
+	act.dragAndDropBy(driver.findElement(By.xpath("//div[@id='draggable']")), 300, 150).perform()
+
+	}
+
+}
+		
